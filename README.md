@@ -47,31 +47,32 @@ If you want to have your users login to their Mendix app with their Office 365 c
 
 # Installation & Configuration
 
-* Download and install the Community Commons modules from the Mendix App store.
-* Download a MSGraphConnector module package from a desired release folder.
-* Import the MSGraphConnector module package into your project.
-* Add the following page to your project navigation: "_USE ME/Pages/Admin/MSGraph_Administration"
+1. Download and install the Community Commons modules from the Mendix App store.
+2. Download a MSGraphConnector module package from a desired release folder.
+3. Import the MSGraphConnector module package into your project.
+4. Add the following page to your project navigation: "_USE ME/Pages/Admin/MSGraph_Administration"
 
-* Add the following microflow to your application startup microflow: "_USE ME/Startup/StartWithCustomRequestHandlers", with the following default values:
-<li>ContextPath: 'msgraph/'</li>
-<li>SigninPath: 'signin'</li>
-<li>CallbackPath: 'callback'</li>
-<li>LogoutPath: 'logout'</li>
-
+5. Add the following microflow to your application startup microflow: "_USE ME/Startup/StartWithCustomRequestHandlers", with the following default values:
+* ContextPath: 'msgraph/'
+* SigninPath: 'signin'
+* CallbackPath: 'callback'
+* LogoutPath: 'logout'
 
 This startup microflow will create a msgraph request handler in your application configure the following urls:
-<li>Signin: <YourApplicationURI>/msgraph/signin</li>
-<li>OAuth Callback: <YourApplicationURI>/msgraph/callback</li>
-<li>Logout: <YourApplicationURI>/msgraph/logout</li>
+* Signin: <YourApplicationURI>/msgraph/signin</li>
+* OAuth Callback: <YourApplicationURI>/msgraph/callback</li>
+* Logout: <YourApplicationURI>/msgraph/logout</li>
+
 <b>IMPORTANT</b>: When deploying your application in a Mendix Cloud environment remember to register the "msgraph/" request handler or configured in ContextPath.
 
-* Edit your login page and add the following line of code just beneath the "Sign up with your Mendix account" link:
-<a id="ssoButton" href="msgraph/signin" class="login-sso-button btn btn-default" style="margin-top: 20px;"><img id="ms-signin-button" alt="sign in" src="./MSSignInButton.svg" class=""></a>
+6. Edit your login page and add the following line of code just beneath the "Sign up with your Mendix account" link:
+
+* <a id="ssoButton" href="msgraph/signin" class="login-sso-button btn btn-default" style="margin-top: 20px;"><img id="ms-signin-button" alt="sign in" src="./MSSignInButton.svg" class=""></a>
 
 An example login page and the MSSignInButton.svg image file can be downloaded from github in the resources folder.
 IMPORTANT: If you change the default values above for the startup microflow ensure you change the href accordingly to your signin path.
 
-* Ensure your account administration pages include a Email attribute.
+7. Ensure your account administration pages include a Email attribute.
 * Enable your project security and configure the MSGraphConnector user roles.
 
 Register your application on  Microsoft App Registration Portal at https://apps.dev.microsoft.com, for more information please refer to this guide: https://developer.microsoft.com/en-us/graph/docs/concepts/auth_register_app_v2
