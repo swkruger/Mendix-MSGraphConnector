@@ -125,7 +125,7 @@ Microsoft Graph authorization tokens are usually valid for 1 hour, you should im
 * json-simple.jar (Included)
 
 # Known bugs
-* None so far
+* The first user login is slow, this is due to the httpClient starting. Will consider to include a StartModule microflow in a future release.
 
 # Frequently Asked Questions
 * Ask your question at the Mendix Community <a href="https://mxforum.mendix.com/" target="_blank">Forum</a>
