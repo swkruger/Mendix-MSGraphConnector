@@ -67,7 +67,9 @@ If you want to have your users login to their Mendix app with their Office 365 c
 
 6. Edit your login page and add the following line of code just beneath the "Sign up with your Mendix account" link:
 
-    <a id="ssoButton" href="msgraph/signin" class="login-sso-button btn btn-default" style="margin-top: 20px;"><img id="ms-signin-           button" alt="sign in" src="./MSSignInButton.svg" class=""></a>
+    ```html
+    <a id="ssoButton" href="msgraph/signin" class="login-sso-button btn btn-default" style="margin-top: 20px;"><img id="ms-signin-button" alt="sign in" src="./MSSignInButton.svg" class=""></a>
+    ```
 
     An example login page and the MSSignInButton.svg image file can be downloaded from github in the resources folder.
     IMPORTANT: If you change the default values above for the startup microflow ensure you change the href accordingly to your signin       path.
@@ -109,7 +111,7 @@ Congratulations, the next time you login you should be able to login with a Micr
 
     * The MSGraphConnector Module include custom html pages to handle errors and information during logging into MS Graph, these can be         found in your project directory in the resources/MSGraph folder. You can create custom pages where neccessary.
 
-## Token Management:
+### Token Management:
 The MSGraphConnector module stores user authorization tokens which could be used to access other MSGraph APIs such as mail and calendar. For more information visit: https://developer.microsoft.com/en-us/graph/docs/concepts/overview. Also see the user samples in the module folder. 
 It is important that user tokens are deleted when a user logs out of the application. You can use the custom logout microflow in "_USE ME/Microflow/Login" to handle this.
 Microsoft Graph authorization tokens are usually valid for 1 hour, you should implement the refresh token api to keep users logged in and using the API.
