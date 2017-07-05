@@ -63,7 +63,7 @@ This startup microflow will create a msgraph request handler in your application
 * OAuth Callback: <YourApplicationURI>/msgraph/callback</li>
 * Logout: <YourApplicationURI>/msgraph/logout</li>
 
-<b>IMPORTANT</b>: When deploying your application in a Mendix Cloud environment remember to register the "msgraph/" request handler or configured in ContextPath.
+<b>IMPORTANT</b>: When deploying your application in a Mendix Cloud environment remember to register the "msgraph/" request handler or as configured in ContextPath.
 
 6. Edit your login page and add the following line of code just beneath the "Sign up with your Mendix account" link:
 
@@ -73,43 +73,46 @@ An example login page and the MSSignInButton.svg image file can be downloaded fr
 IMPORTANT: If you change the default values above for the startup microflow ensure you change the href accordingly to your signin path.
 
 7. Ensure your account administration pages include a Email attribute.
-* Enable your project security and configure the MSGraphConnector user roles.
+8. Enable your project security and configure the MSGraphConnector user roles.
 
-Register your application on  Microsoft App Registration Portal at https://apps.dev.microsoft.com, for more information please refer to this guide: https://developer.microsoft.com/en-us/graph/docs/concepts/auth_register_app_v2
-IMPORTANT: Configure the same callback url as in the application configuration in your application.
+9. Register your application on  Microsoft App Registration Portal at https://apps.dev.microsoft.com, for more information please refer to this guide: https://developer.microsoft.com/en-us/graph/docs/concepts/auth_register_app_v2
+<b>IMPORTANT</b>: Configure the same callback url as in the application configuration in your application.
 
-Build and run your application and login as an Administrator.
-Navigate to the MSGraph_Administration page and complete the Application Configuration:
+10. Build and run your application and login as an Administrator.
+11. Navigate to the MSGraph_Administration page and complete the Application Configuration:
 
-First select the Default Permissions tab, and click the Create Default Permissions button.
+12. First select the Default Permissions tab, and click the Create Default Permissions button.
 
-Next, on the Application Setup tab:
+13. Next, on the Application Setup tab:
 
-Name: Name of your application.
-CliendId: From Microsoft App Registration Portal
-Secret: From Microsoft App Registration Portal
-RedirectURL: <your application url>/msgraph/callback or as configured in the CallbackPath.
-MS Graph User Identifier: available options are: mail/principleName. This is how your Mendix application will identify your user.
-Error Handling: Choose how the module should handle any MSGraph API related errors.
-Select the following default permissions: offline_access, User.ReadWrite
-Save Application Configuration.
+<li>Name: Name of your application.</li>
+<li>CliendId: From Microsoft App Registration Portal</li>
+<li>Secret: From Microsoft App Registration Portal</li>
+<li>RedirectURL: <your application url>/msgraph/callback or as configured in the CallbackPath.</li>
+<li>MS Graph User Identifier: available options are: mail/principleName. This is how your Mendix application will identify your user.</li>
+<li>Error Handling: Choose how the module should handle any MSGraph API related errors.</li>
+<li>Select the following default permissions: offline_access, User.ReadWrite</li>
+<li>Save Application Configuration.</li>
 
-Create a New local user account and capture your email address.
+14. Create a New local user account and capture your email address.
+
+
 
 Congratulations, the next time you login you should be able to login with a Microsoft 365 personal or work account.
 
+15.
 Other configuration to consider:
-Review the constant values in "_USE ME/Config"
-CookieName: A cookie is temporarly stored on the user's pc while logging into MSGraph. Consider the changing to cookie name to a more secure name.
-MicrosoftGraphBaseAPIUrl: The Microsoft Graph base API enpoint url.
-MicrosoftOnlineBaseAuthUrl: The Microsoft Graph base authorization Url.
-MicrosoftOnlineBaseAuthUrlAdminConsent: The Microsoft Graph admin authorization Url.
-MicrosoftOnlineBaseAuthUrlAdminConsent: The Microsoft Graph admin authorization Url.
-ResolveUserMicroflow: You can configure a custom user resolver microflow. The value must a fully qualified name including the module name, default: MSGraphConnector.ResolveUserByEmail
+<li>Review the constant values in "_USE ME/Config"
+<li>CookieName: A cookie is temporarly stored on the user's pc while logging into MSGraph. Consider the changing to cookie name to a more secure name.
+<li>MicrosoftGraphBaseAPIUrl: The Microsoft Graph base API enpoint url.
+<li>MicrosoftOnlineBaseAuthUrl: The Microsoft Graph base authorization Url.
+<li>MicrosoftOnlineBaseAuthUrlAdminConsent: The Microsoft Graph admin authorization Url.
+<li>MicrosoftOnlineBaseAuthUrlAdminConsent: The Microsoft Graph admin authorization Url.
+<li>ResolveUserMicroflow: You can configure a custom user resolver microflow. The value must a fully qualified name including the module name, default: MSGraphConnector.ResolveUserByEmail
 
 The MSGraphConnector Module include custom html pages to handle errors and information during logging into MS Graph, these can be found in your project directory in the resources/MSGraph folder. You can create custom pages where neccessary.
 
-Token Management:
+## Token Management:
 The MSGraphConnector module stores user authorization tokens which could be used to access other MSGraph APIs such as mail and calendar. For more information visit: https://developer.microsoft.com/en-us/graph/docs/concepts/overview. Also see the user samples in the module folder. 
 It is important that user tokens are deleted when a user logs out of the application. You can use the custom logout microflow in "_USE ME/Microflow/Login" to handle this.
 Microsoft Graph authorization tokens are usually valid for 1 hour, you should implement the refresh token api to keep users logged in and using the API.
