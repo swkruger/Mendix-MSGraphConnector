@@ -64,9 +64,9 @@ If you want to have your users login to their Mendix app with their Office 365 c
     * LogoutPath: 'logout'
 
     The startup microflow will create a msgraph request handler for your application and expose the following urls:
-    * Signin: <YourApplicationURI>/msgraph/signin - use to signin to the application with Office 365</li>
-    * OAuth Callback: <YourApplicationURI>/msgraph/callback - callback url used by MS Graph to post auth tokens</li>
-    * Logout: <YourApplicationURI>/msgraph/logout - logout of the application</li>
+    * Signin: {YourApplicationURI}/msgraph/signin - use to signin to the application with Office 365</li>
+    * OAuth Callback: {YourApplicationURI}/msgraph/callback - callback url used by MS Graph to post auth tokens</li>
+    * Logout: {YourApplicationURI}/msgraph/logout - logout of the application</li>
     
     Send your users the signin url to directly login to the application. 
 
@@ -97,7 +97,7 @@ If you want to have your users login to their Mendix app with their Office 365 c
         * Name: Name of your application.
         * CliendId: From Microsoft App Registration Portal</li>
         * Secret: From Microsoft App Registration Portal</li>
-        * RedirectURL: <your application url>/msgraph/callback or as configured in the CallbackPath.</li>
+        * RedirectURL: {your application url}/msgraph/callback or as configured in the CallbackPath.</li>
         * MS Graph User Identifier: available options are: mail/principleName. This is how your Mendix application will identify your user.
         * Error Handling: Choose how the module should handle any MSGraph API related errors.</li>
         * Select the following default permissions: offline_access, User.ReadWrite</li>
