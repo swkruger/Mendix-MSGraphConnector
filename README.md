@@ -27,6 +27,8 @@
 # Description
 A Mendix Microsoft Graph connector that allows users to login to a Mendix application using their personal or work Office 365 accounts. Use the MS Graph authorization tokens to access other APIs such as email and calendar items.
 
+For more information visit: https://developer.microsoft.com/en-us/graph/docs/concepts/overview
+
 # Typical usage scenario
 If you want to have your users login to their Mendix app with their Office 365 credentials. Also use the module if you want to access other Microsoft Graph APIs such as email and calendar items.
 
@@ -72,13 +74,13 @@ If you want to have your users login to their Mendix app with their Office 365 c
     ```
 
     An example login page and the MSSignInButton.svg image file can be downloaded from github in the resources folder.
-    IMPORTANT: If you change the default values above for the startup microflow ensure you change the href accordingly to your signin       path.
+    <b>IMPORTANT</b>: If you change the default values above for the startup microflow ensure you change the href accordingly to your signin       path.
 
 7. Ensure your account administration pages include a Email attribute.
 8. Enable your project security and configure the MSGraphConnector user roles.
 
 9. Register your application on  Microsoft App Registration Portal at https://apps.dev.microsoft.com, for more information please refer to this guide: https://developer.microsoft.com/en-us/graph/docs/concepts/auth_register_app_v2
-    <b>IMPORTANT</b>: Configure the same callback url as in the application configuration in your application.
+    <b>IMPORTANT</b>: Configure the same RedirectURL as in your application setup in step 11.
 
 10. Build and run your application and login as an Administrator.
 11. Navigate to the MSGraph_Administration page and complete the Application Configuration:
@@ -98,7 +100,7 @@ If you want to have your users login to their Mendix app with their Office 365 c
 
 12. Create a New local user account and capture your email address.
 
-Congratulations, the next time you login you should be able to login with a Microsoft 365 personal or work account.
+__Congratulations, the next time you login you should be able to login with a Microsoft 365 personal or work account.__
 
 13. Other configuration to consider:
     * Review the constant values in "_USE ME/Config"
