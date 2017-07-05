@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD><TITLE>Application Error</TITLE>
+<META content="text/html; charset=windows-1252" http-equiv=Content-Type>
+<link rel="stylesheet" href="../../css/theme.css"></HEAD>
+<BODY class="bodybg">
+<img alt="logo (2K)" src="../css/images/mendix-logo.png" />
+<P align=center>&nbsp;</P>
+<P align=center>&nbsp;</P>
+<P align=center><STRONG><font face="arial" size="6px" color="navy">Administrator has successfully given consent to this application permissions.</font></STRONG></P>
+<P align=center><font size="5px">Thank you.</P>
+
+
+<script type="text/javascript">
+	function getQueryParams(qs) {
+	    qs = qs.split('+').join(' ');
+
+	    var params = {},
+	        tokens,
+	        re = /[?&]?([^=]+)=([^&]*)/g;
+
+	    while (tokens = re.exec(qs)) {
+	        params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+	    }
+
+	    return params;
+	}
+</script>
+
+<div id="tenant" class="tenant">
+<script type="text/javascript">
+	var query = getQueryParams(document.location.search);
+	document.getElementById("tenant").innerHTML = query.tenant;	
+</script>
+</div>
