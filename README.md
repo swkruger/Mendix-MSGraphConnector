@@ -22,6 +22,9 @@
 <tr> 
     <td bgcolor="#DDD"> Released</td><td>7-5-2017</td>
 </tr>
+<tr> 
+    <td bgcolor="#DDD"> Mendix Version</td><td>Mendix 7.3.0</td>
+</tr>
 </table>
 
 # Description
