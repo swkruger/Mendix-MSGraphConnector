@@ -257,8 +257,9 @@ public class MSGraphCallback {
 				 */
                 Core.getLogger("MSGraph").debug("User found: "+user.getName());
                 new LogRecordHandler().createLogRecord(jsonUserObject.toString(),MSGraphAuthMessage.Access);
-                IUser iUser = Core.getUser(context, user.getName());
                 new AuthTokenHandler().createAuthTokenRecordFromJson(jsonAuthTokenObject, user);
+
+                IUser iUser = Core.getUser(context, user.getName());
                 LoginHelper.createSession(request, response, context, iUser);
             }else{
 				/*

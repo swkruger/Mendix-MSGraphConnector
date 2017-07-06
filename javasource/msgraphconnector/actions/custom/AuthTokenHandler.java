@@ -4,7 +4,6 @@ import com.mendix.core.Core;
 import com.mendix.core.CoreException;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.systemwideinterfaces.core.IUser;
 import communitycommons.XPath;
 import msgraphconnector.proxies.AuthToken;
 import org.json.simple.JSONObject;
@@ -34,6 +33,9 @@ public class AuthTokenHandler {
     void createAuthTokenRecordFromJson(JSONObject tokenJson, User user) throws CoreException {
         try {
             IContext context = Core.createSystemContext();
+            //First delete all existing tokens.
+            deleteUserTokens(context,user);
+
             AuthToken authToken = new AuthToken(context);
             authToken.setToken_Type(tokenJson.get("token_type").toString());
             authToken.setScope(tokenJson.get("scope").toString());
@@ -46,12 +48,12 @@ public class AuthTokenHandler {
             authToken.setAuthToken_User(user);
             authToken.commit();
         } catch (Exception e) {
-            Core.getLogger("MSGraph").info("An error occured when creating the AuthToken record. /n"+e.getStackTrace());
+            Core.getLogger("MSGraph").error("An error occured when creating the AuthToken record. /n"+e.getStackTrace());
             e.printStackTrace();
         }
     }
 
-    public void deleteUserTokens(IContext context, IUser user) {
+    public void deleteUserTokens(IContext context, User user) {
         try {
             XPath<AuthToken> xpath = XPath.create(context,AuthToken.class)
                     .eq(AuthToken.MemberNames.AuthToken_User, user);
