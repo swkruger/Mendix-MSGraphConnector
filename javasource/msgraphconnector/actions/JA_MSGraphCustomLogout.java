@@ -32,7 +32,7 @@ public class JA_MSGraphCustomLogout extends CustomJavaAction<java.lang.Boolean>
 		ISession session = context.getSession();
 		if (session != null){
 			IUser user = session.getUser(context);
-			new AuthTokenHandler().deleteUserTokens(context, user);
+			new AuthTokenHandler().deleteUserTokens(context, user.getMendixObject());
 			FeedbackHelper.addLogoutFeedback(getContext());
 			Core.logout(session);
 		}

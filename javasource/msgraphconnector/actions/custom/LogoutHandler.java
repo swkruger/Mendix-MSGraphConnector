@@ -31,7 +31,7 @@ public class LogoutHandler  {
 
         if (session != null){
             IUser user = session.getUser(context);
-            new AuthTokenHandler().deleteUserTokens(context, user);
+            new AuthTokenHandler().deleteUserTokens(context, user.getMendixObject());
             Core.logout(session);
         }
 

@@ -34,7 +34,7 @@ public class AuthTokenHandler {
         try {
             IContext context = Core.createSystemContext();
             //First delete all existing tokens.
-            deleteUserTokens(context,user);
+            deleteUserTokens(context,user.getMendixObject());
 
             AuthToken authToken = new AuthToken(context);
             authToken.setToken_Type(tokenJson.get("token_type").toString());
@@ -53,7 +53,7 @@ public class AuthTokenHandler {
         }
     }
 
-    public void deleteUserTokens(IContext context, User user) {
+    public void deleteUserTokens(IContext context, IMendixObject user) {
         try {
             XPath<AuthToken> xpath = XPath.create(context,AuthToken.class)
                     .eq(AuthToken.MemberNames.AuthToken_User, user);

@@ -37,6 +37,7 @@ public class MSGraphCallback {
     private final String STATEHTML = Constants.getStateErrorPage();
     private final String USERINFOURL = Constants.getMicrosoftGraphBaseAPIUrl()+"/me?$select=userPrincipalName,mail";
     private final String USERRESOLVERMF = Constants.getResolveUserMicroflow();
+    private final String USERIDFALLBACKFIELD = "userPrincipalName";
 
     public MSGraphCallback() {
     }
@@ -241,8 +242,22 @@ public class MSGraphCallback {
             User user = null;
 
             Application application = new MSGraphApplication().getApplication(context);
+            Object userId = jsonUserObject.get(application.getUserId_MSGraph());
+            if (userId == null) {
+                userId = jsonUserObject.get(USERIDFALLBACKFIELD);
+            }
 
-            user=resolveUser(context, jsonUserObject.get(application.getUserId_MSGraph()).toString(),application);
+            if (userId != null) {
+                user=resolveUser(context, userId.toString(),application);
+            }
+            else {
+                Core.getLogger("MSGraph").debug("User identifier value not found in MS Graph user json returned object: " +jsonUserObject.toString());
+                new LogRecordHandler().createLogRecord(jsonUserObject.toString(),MSGraphAuthMessage.Unauthorised);
+                new ErrorHandler().processErrorHandler(response, MSGRAPHDIR, UNAUTHHTML);
+                return;
+            }
+
+
 
             /*
             if(pathParameters[1].equals("callback")){
