@@ -17,7 +17,7 @@
     <td bgcolor="#DDD"> Latest version</td><td>Alpha</td>
 </tr>
 <tr> 
-    <td bgcolor="#DDD"> Package name</td><td>MSGraphConnector_Alpha.mpk</td>
+    <td bgcolor="#DDD"> Package name</td><td>MSGraphConnector.mpk</td>
 </tr>
 <tr> 
     <td bgcolor="#DDD"> Released</td><td>7-5-2017</td>
@@ -47,13 +47,13 @@ If you want to have your users login to their Mendix app with their Office 365 c
 * Customize your user resolution microflow.
 * Still allow users to login with their Mendix accounts or as local users.
 * Except Community Commons the module requires no external modules, everything is included.
-* Choose to use custom request handlers or optionaly use the DeepLink module.
+* Choose to use custom request handlers or optionally use the DeepLink module.
 * Limited to MS Graph API only.
 
 # Installation & Configuration
 
 1. Download and install the Community Commons modules from the Mendix App store.
-2. Download a MSGraphConnector module package from a desired release folder.
+2. Download the MSGraphConnector module package from a desired release folder.
 3. Import the MSGraphConnector module package into your project.
 4. Add the following page to your project navigation: "_USE ME/Pages/Admin/MSGraph_Administration"
 
@@ -109,21 +109,21 @@ __Congratulations, the next time you login you should be able to login with a Mi
 
 13. Other configuration to consider:
     * Review the constant values in "_USE ME/Config"
-    * CookieName: A cookie is temporarly stored on the user's pc while logging into MSGraph. Consider the changing to cookie name to a          more secure name.
+    * CookieName: A cookie is temporarily stored on the user's pc while logging into MSGraph. Consider the changing to cookie name to a          more secure name.
     * MicrosoftGraphBaseAPIUrl: The Microsoft Graph base API enpoint url.
     * MicrosoftOnlineBaseAuthUrl: The Microsoft Graph base authorization Url.
     * MicrosoftOnlineBaseAuthUrlAdminConsent: The Microsoft Graph admin authorization Url.
     * MicrosoftOnlineBaseAuthUrlAdminConsent: The Microsoft Graph admin authorization Url.
     * ResolveUserMicroflow: You can configure a custom user resolver microflow. The value must a fully qualified name including the            module name, default: MSGraphConnector.ResolveUserByEmail
 
-    * The MSGraphConnector Module include custom html pages to handle errors and information during logging into MS Graph, these can be         found in your project directory in the resources/MSGraph folder. You can create custom pages where neccessary.
+    * The MSGraphConnector Module include custom html pages to handle errors and information during logging into MS Graph, these can be         found in your project directory in the resources/MSGraph folder. You can create custom pages where necessary.
 
 ### Token Management:
 The MSGraphConnector module stores user authorization tokens which could be used to access other MSGraph APIs such as mail and calendar. For more information visit: https://developer.microsoft.com/en-us/graph/docs/concepts/overview. Also see the user samples in the module folder. 
 It is important that user tokens are deleted when a user logs out of the application. You can use the custom logout microflow in "_USE ME/Microflow/Login" to handle this.
 Microsoft Graph authorization tokens are usually valid for 1 hour, you should implement the refresh token api to keep users logged in and using the API.
 
-# Dependancies:
+# Dependencies:
 * Community Commons Function Library (Available in the Mendix app store)
 * Deeplink (Optional) (Available in the Mendix app store)
 * URLRedirector Widget (Optional) (Included)
@@ -134,8 +134,3 @@ Microsoft Graph authorization tokens are usually valid for 1 hour, you should im
 
 # Frequently Asked Questions
 * Ask your question at the Mendix Community <a href="https://mxforum.mendix.com/" target="_blank">Forum</a>
-
-
-
-
-
