@@ -14,10 +14,10 @@
     <td bgcolor="#DDD"> Type</td><td>Module</td>
 </tr>
 <tr> 
-    <td bgcolor="#DDD"> Latest version</td><td>Alpha</td>
+    <td bgcolor="#DDD"> Latest version</td><td>1.0.0-beta</td>
 </tr>
 <tr> 
-    <td bgcolor="#DDD"> Package name</td><td>MSGraphConnector.mpk</td>
+    <td bgcolor="#DDD"> Package name</td><td>MSGraphConnector_1.0.0-beta.mpk</td>
 </tr>
 <tr> 
     <td bgcolor="#DDD"> Released</td><td>7-5-2017</td>
