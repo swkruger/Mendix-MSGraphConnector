@@ -42,7 +42,7 @@ public class AuthTokenHandler {
             authToken.setExpires_In(((Long)tokenJson.get("expires_in")).intValue());
             authToken.setExt_Expires_In(((Long)tokenJson.get("ext_expires_in")).intValue());
             authToken.setAccess_Token(tokenJson.get("access_token").toString());
-            if(tokenJson.containsValue("refresh_token")) {
+            if(tokenJson.containsKey("refresh_token")) {
             	authToken.setRefresh_Token(tokenJson.get("refresh_token").toString());
             }
             authToken.setCreated_Date(new Date());
