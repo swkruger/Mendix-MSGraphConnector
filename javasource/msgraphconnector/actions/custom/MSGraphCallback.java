@@ -46,7 +46,7 @@ public class MSGraphCallback {
      * This method will start processing the incoming callback request from MS Graph
      *
      */
-    protected void processCallbackRequest(IMxRuntimeRequest request, IMxRuntimeResponse response) throws Exception {
+    /**protected void processCallbackRequest(IMxRuntimeRequest request, IMxRuntimeResponse response) throws Exception {
         HttpServletRequest servletRequest =  request.getHttpServletRequest();
         Core.getLogger("MSGraph").trace("Received process request event");
         try {
@@ -55,6 +55,32 @@ public class MSGraphCallback {
         } catch (Exception ex) {
             Core.getLogger("MSGraph").error("Exception occurred while processing request "+ex);
             response.sendError("Exception occurred while processing request");
+        }
+    }*/
+	
+    protected void processCallbackRequest(IMxRuntimeRequest request, IMxRuntimeResponse response) throws Exception {
+        HttpServletRequest servletRequest =  request.getHttpServletRequest();
+        //Added next line
+        HttpServletResponse servletResponse = response.getHttpServletResponse();
+        Core.getLogger("MSGraph").trace("Received process request event");
+        try {
+            Core.getLogger("MSGraph").debug("Request URI: "+ servletRequest.getRequestURI());
+            doCallbackService(request, response);
+        } catch (Exception ex) {
+        	//Added to catch http error 500
+        	try {
+        		String url = "/index.html";
+        		servletResponse.sendRedirect(url);
+        		
+        		String url2 = servletRequest.getRequestURL().toString();        	
+        		
+            } catch (Exception e) {  
+            	 System.out.print(e);
+            	 Core.getLogger("MSGraph").error("Exception occurred while processing request "+ex);
+                 response.sendError("Exception occurred while processing request");
+            }
+        	/**Core.getLogger("MSGraph").error("Exception occurred while processing request "+ex);
+            response.sendError("Exception occurred while processing request");*/
         }
     }
 
