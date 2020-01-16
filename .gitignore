@@ -1,3 +1,4 @@
+deployment/
 temp/
-*.mpr
 *.mpr.lock
+*.bak
