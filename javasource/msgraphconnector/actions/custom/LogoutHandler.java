@@ -45,8 +45,8 @@ public class LogoutHandler  {
             }
             String logoutPage = stringBuilder.toString();
             OutputStream outputStream = response.getOutputStream();
-            IOUtils.write(logoutPage, outputStream);
-            IOUtils.closeQuietly(outputStream);
+            IOUtils.write(logoutPage, outputStream, (String) null);
+            outputStream.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

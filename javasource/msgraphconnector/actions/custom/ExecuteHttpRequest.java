@@ -13,17 +13,16 @@ import java.io.IOException;
  */
 class ExecuteHttpRequest {
     protected String execute(HttpRequestBase request) throws IOException {
-        HttpClient httpClient = HttpClientSingleton.getInstance().getClient();
+        HttpClientSingleton.getInstance();
+		HttpClient httpClient = HttpClientSingleton.getClient();
         HttpResponse response = httpClient.execute(request);
 
         HttpEntity entity = response.getEntity();
         String body = EntityUtils.toString(entity);
 
         if (response.getStatusLine().getStatusCode() != 200) {
-            //httpClient.getConnectionManager().shutdown();
             throw new RuntimeException("Expected 200 but got " + response.getStatusLine().getStatusCode() + ", with body " + body);
         }
-        //httpClient.getConnectionManager().shutdown();
         EntityUtils.consume(entity);
         return body;
     }

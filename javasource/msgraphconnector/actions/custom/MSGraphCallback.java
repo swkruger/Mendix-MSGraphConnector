@@ -20,7 +20,6 @@ import system.proxies.User;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,27 +59,13 @@ public class MSGraphCallback {
 	
     protected void processCallbackRequest(IMxRuntimeRequest request, IMxRuntimeResponse response) throws Exception {
         HttpServletRequest servletRequest =  request.getHttpServletRequest();
-        //Added next line
-        HttpServletResponse servletResponse = response.getHttpServletResponse();
         Core.getLogger("MSGraph").trace("Received process request event");
         try {
             Core.getLogger("MSGraph").debug("Request URI: "+ servletRequest.getRequestURI());
             doCallbackService(request, response);
         } catch (Exception ex) {
-        	//Added to catch http error 500
-        	try {
-        		String url = "/index.html";
-        		servletResponse.sendRedirect(url);
-        		
-        		String url2 = servletRequest.getRequestURL().toString();        	
-        		
-            } catch (Exception e) {  
-            	 System.out.print(e);
-            	 Core.getLogger("MSGraph").error("Exception occurred while processing request "+ex);
-                 response.sendError("Exception occurred while processing request");
-            }
-        	/**Core.getLogger("MSGraph").error("Exception occurred while processing request "+ex);
-            response.sendError("Exception occurred while processing request");*/
+        	Core.getLogger("MSGraph").error("Exception occurred while processing request "+ex);
+            response.sendError("Exception occurred while processing request");
         }
     }
 
@@ -91,7 +76,7 @@ public class MSGraphCallback {
      * The Access Token is used to retrieve information on behalf of the user with MS Graph
      */
     private void doCallbackService(IMxRuntimeRequest request, IMxRuntimeResponse response) throws ServletException, IOException, CoreException {
-        HttpServletResponse servletResponse = response.getHttpServletResponse();
+        //HttpServletResponse servletResponse = response.getHttpServletResponse();
         HttpServletRequest servletRequest = request.getHttpServletRequest();
         if (request.getParameter("error") != null) {
             Core.getLogger("MSGraph").error("An error occured in the MS Graph callback request: "+ request.getParameter("error")+ ", " + request.getParameter("error_description"));
@@ -107,9 +92,6 @@ public class MSGraphCallback {
             return;
         }
 
-        /*
-		 * Check cookie for UUID compared to state value
-		 */
         /*
 		 * Check cookie for UUID compared to state value
 		 */
@@ -217,7 +199,6 @@ public class MSGraphCallback {
 		 *
 		 * Be aware that tokens will expire!
 		 */
-        boolean isJson = true;
         StringBuilder accessToken = new StringBuilder();
         try {
             jsonAuthTokenObject = (JSONObject) new JSONParser().parse(body);
