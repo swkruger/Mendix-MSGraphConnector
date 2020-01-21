@@ -31,7 +31,7 @@ public class JA_CreateMSGraphRequestHandlers extends CustomJavaAction<java.lang.
 		this.LogoutPath = LogoutPath;
 	}
 
-	@Override
+	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
 		// BEGIN USER CODE
@@ -47,7 +47,7 @@ public class JA_CreateMSGraphRequestHandlers extends CustomJavaAction<java.lang.
 	/**
 	 * Returns a string representation of this action
 	 */
-	@Override
+	@java.lang.Override
 	public java.lang.String toString()
 	{
 		return "JA_CreateMSGraphRequestHandlers";

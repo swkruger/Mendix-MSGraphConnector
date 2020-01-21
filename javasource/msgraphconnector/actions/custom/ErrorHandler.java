@@ -8,13 +8,19 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * Created by skruger on 6/26/2017.
  */
 public class ErrorHandler {
     protected void processErrorHandler(IMxRuntimeResponse response,
-                                       String resourceDir, String fileName) throws IOException {
+            String resourceDir, String fileName) throws IOException {
+    	processErrorHandler(response, resourceDir, fileName, null);
+    }
+    
+    protected void processErrorHandler(IMxRuntimeResponse response,
+            String resourceDir, String fileName, String advancedText ) throws IOException {
 
         final String PAGELOCATION = "/"+resourceDir+"/"+fileName;
         StringBuilder stringBuilder = new StringBuilder();
@@ -24,9 +30,18 @@ public class ErrorHandler {
             while ((sCurrentLine = br.readLine()) != null) {
                 stringBuilder.append(sCurrentLine);
             }
-            String logoutPage = stringBuilder.toString();
+            String errorPage = stringBuilder.toString();
+            try {
+            	errorPage = errorPage.replaceAll("(?m)(\r\n|\r|\n)([\t ]*)(<div[^>]+id=\"advanced\"[^>]*>)", "$1$2$3$1$2\t" + advancedText + "f$1$2");
+            } catch (PatternSyntaxException ex) {
+            	// Syntax error in the regular expression
+            } catch (IllegalArgumentException ex) {
+            	// Syntax error in the replacement text (unescaped $ signs?)
+            } catch (IndexOutOfBoundsException ex) {
+            	// Non-existent backreference used the replacement text
+            }
             OutputStream outputStream = response.getOutputStream();
-            IOUtils.write(logoutPage, outputStream, (String) null);
+            IOUtils.write(errorPage, outputStream, (String) null);
             outputStream.close();
             response.setStatus(IMxRuntimeResponse.OK);
         } catch (IOException e) {

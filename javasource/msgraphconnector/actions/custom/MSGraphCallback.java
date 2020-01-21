@@ -12,6 +12,8 @@ import com.mendix.systemwideinterfaces.core.IUser;
 import msgraphconnector.proxies.Application;
 import msgraphconnector.proxies.MSGraphAuthMessage;
 import msgraphconnector.proxies.constants.Constants;
+
+import org.apache.http.client.ClientProtocolException;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,6 +23,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.net.SocketException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +34,9 @@ public class MSGraphCallback {
     private final String UNAUTHHTML = Constants.getUnauthorizedAccessPage();
     private final String COOKIEHTML = Constants.getCookieErrorPage();
     private final String ERRORHTML = Constants.getErrorPage();
+    private final String SOCKETHTML = Constants.getSocketErrorPage();
     private final String ADMINCONSENTHTML = Constants.getAdminConsentSuccessPage();
+    private final String ERROR_RELOAD = Constants.getErrorReloadPage();
     private final String MSGRAPHDIR = "MSGraph";
     private final String STATEHTML = Constants.getStateErrorPage();
     private final String USERINFOURL = Constants.getMicrosoftGraphBaseAPIUrl()+"/me?$select=userPrincipalName,mail";
@@ -45,26 +50,20 @@ public class MSGraphCallback {
      * This method will start processing the incoming callback request from MS Graph
      *
      */
-    /**protected void processCallbackRequest(IMxRuntimeRequest request, IMxRuntimeResponse response) throws Exception {
-        HttpServletRequest servletRequest =  request.getHttpServletRequest();
-        Core.getLogger("MSGraph").trace("Received process request event");
-        try {
-            Core.getLogger("MSGraph").debug("Request URI: "+ servletRequest.getRequestURI());
-            doCallbackService(request, response);
-        } catch (Exception ex) {
-            Core.getLogger("MSGraph").error("Exception occurred while processing request "+ex);
-            response.sendError("Exception occurred while processing request");
-        }
-    }*/
-	
     protected void processCallbackRequest(IMxRuntimeRequest request, IMxRuntimeResponse response) throws Exception {
         HttpServletRequest servletRequest =  request.getHttpServletRequest();
         Core.getLogger("MSGraph").trace("Received process request event");
         try {
             Core.getLogger("MSGraph").debug("Request URI: "+ servletRequest.getRequestURI());
             doCallbackService(request, response);
+        } catch (SocketException ex) {
+        	Core.getLogger("MSGraph").error("Exception occurred while processing request "+ex);
+//            new ErrorHandler().processErrorHandler(response, MSGRAPHDIR, SOCKETHTML);
+//            response.sendError("Exception occurred while processing request");
+        	response.setStatus(303, "Location:/");
         } catch (Exception ex) {
         	Core.getLogger("MSGraph").error("Exception occurred while processing request "+ex);
+            new ErrorHandler().processErrorHandler(response, MSGRAPHDIR, ERRORHTML);
             response.sendError("Exception occurred while processing request");
         }
     }
@@ -169,7 +168,12 @@ public class MSGraphCallback {
         String body=  "";
         String code = request.getParameter("code");
         GetAccessTokenMSGraph accessTokenMSGraph = new GetAccessTokenMSGraph(code);
-        body = accessTokenMSGraph.getResult();
+        try {
+        	body = accessTokenMSGraph.getResult();
+        } catch ( Exception e ) {
+            new ErrorHandler().processErrorHandler(response, MSGRAPHDIR, ERROR_RELOAD);
+            return;
+        }
 
         /*
         String requestPath = servletRequest.getRequestURI();

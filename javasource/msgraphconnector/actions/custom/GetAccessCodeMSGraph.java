@@ -6,9 +6,11 @@ import com.mendix.systemwideinterfaces.core.IContext;
 import msgraphconnector.proxies.Application;
 import msgraphconnector.proxies.Permission;
 import msgraphconnector.proxies.constants.Constants;
+import stringutils.actions.URLEncode;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -41,7 +43,8 @@ class GetAccessCodeMSGraph {
                 //.append("&approval_prompt=auto"); // this requires them to verify which account to use, if they are already signed in
 
         if (scope.length() > 0) {
-            oauthUrl.append("&scope="+scope.toString()); // scope is the api permissions we are requesting
+        	String encodedScope = URLEncoder.encode(scope.toString(), "UTF-8");
+            oauthUrl.append("&scope=" + encodedScope); // scope is the api permissions we are requesting
 
         }
         Core.getLogger("MSGraph").trace("Url used for google: \n"+oauthUrl.toString());

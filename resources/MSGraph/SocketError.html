@@ -1,9 +1,8 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Logged out</title>
+		<title>Application Error</title>
 		<meta content="text/html; charset=windows-1252" http-equiv="Content-Type">
-		<meta http-equiv="Refresh" content="3; url=https://login.microsoftonline.com/common/oauth2/logout?" />
 		<style type="text/css">
 			body {
 				font-family:'Open Sans',sans-serif;
@@ -44,8 +43,48 @@
 		</div>
 		<div class="message">
 			<div class="message-content">
-				<h1>Logging you out...</h1>
-				<p>If you have changed your mind, you can <a href="/">log back in</a>.</p>
+				<h1>An error occured!</h1>
+				<h2>Socket Error</h2>
+				<p>If this is the first time you have seen this message, please <a href="/">try again</a>.</p>
+				<p>If the issue persists, please contact the <a href="mailto:ITHelpDesk@shelterbox.org">IT Helpdesk</a>.</p>
+				<script type="text/javascript">
+				<!--
+					function getQueryParams(qs) {
+					    qs = qs.split('+').join(' ');
+
+					    var params = {},
+						  tokens,
+						  re = /[?&]?([^=]+)=([^&]*)/g;
+
+					    while (tokens = re.exec(qs)) {
+						  params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+					    }
+
+					    return params;
+					}
+				//-->
+				</script>
+				<div id="errorName" class="errorName">
+					<script type="text/javascript">
+					<!--
+						var query = getQueryParams(document.location.search);
+						if( typeof query.error != 'undefined' ) {
+							document.getElementById("errorName").innerHTML = query.error;	
+						}
+					//-->
+					</script>
+				</div>
+				<div id="errorDescription" class="errorDescription">
+					<script type="text/javascript">
+					<!--
+						var query = getQueryParams(document.location.search);
+						if( typeof query.error_description != 'undefined' ) {
+							document.getElementById("errorDescription").innerHTML = query.error_description;
+						}
+					//-->
+					</script>
+				</div>
+				<div id="advanced"></div>
 			</div>
 		</div>
 	</body>

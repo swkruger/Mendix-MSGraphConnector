@@ -44,5 +44,6 @@ public class GetAccessTokenMSGraph extends GetAccessToken {
                 .put("grant_type", "authorization_code").build();
 
         return PostHttpRequest.post(OAUTHURI, map);
+
     }
 }
