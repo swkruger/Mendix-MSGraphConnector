@@ -1,14 +1,9 @@
 package system;
 
-import aQute.bnd.annotation.component.Component;
-import aQute.bnd.annotation.component.Reference;
-
 import com.mendix.core.actionmanagement.IActionRegistrator;
 
-@Component(immediate = true)
 public class UserActionsRegistrar
 {
-  @Reference
   public void registerActions(IActionRegistrator registrator)
   {
     registrator.bundleComponentLoaded();
@@ -109,6 +104,27 @@ public class UserActionsRegistrar
     registrator.registerUserAction(msgraphconnector.actions.JA_CreateMSGraphRequestHandlers.class);
     registrator.registerUserAction(msgraphconnector.actions.JA_GetUUID.class);
     registrator.registerUserAction(msgraphconnector.actions.JA_MSGraphCustomLogout.class);
+    registrator.registerUserAction(stringutils.actions.Base64Decode.class);
+    registrator.registerUserAction(stringutils.actions.Base64Encode.class);
+    registrator.registerUserAction(stringutils.actions.DecryptString.class);
+    registrator.registerUserAction(stringutils.actions.EncryptString.class);
+    registrator.registerUserAction(stringutils.actions.GenerateHMAC_SHA256_hash.class);
+    registrator.registerUserAction(stringutils.actions.GenerateHMAC_SHA256_HexDigest.class);
+    registrator.registerUserAction(stringutils.actions.Hash.class);
+    registrator.registerUserAction(stringutils.actions.HTMLEncode.class);
+    registrator.registerUserAction(stringutils.actions.HTMLToPlainText.class);
+    registrator.registerUserAction(stringutils.actions.RandomHash.class);
+    registrator.registerUserAction(stringutils.actions.RandomString.class);
+    registrator.registerUserAction(stringutils.actions.RandomStrongPassword.class);
+    registrator.registerUserAction(stringutils.actions.RegexQuote.class);
+    registrator.registerUserAction(stringutils.actions.RegexReplaceAll.class);
+    registrator.registerUserAction(stringutils.actions.RegexTest.class);
+    registrator.registerUserAction(stringutils.actions.StringLeftPad.class);
+    registrator.registerUserAction(stringutils.actions.StringLength.class);
+    registrator.registerUserAction(stringutils.actions.StringRightPad.class);
+    registrator.registerUserAction(stringutils.actions.StringTrim.class);
+    registrator.registerUserAction(stringutils.actions.URLEncode.class);
+    registrator.registerUserAction(stringutils.actions.XSSSanitize.class);
     registrator.registerUserAction(system.actions.VerifyPassword.class);
   }
 }
