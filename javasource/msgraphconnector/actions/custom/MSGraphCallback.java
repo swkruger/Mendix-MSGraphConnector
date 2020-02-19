@@ -58,9 +58,9 @@ public class MSGraphCallback {
             doCallbackService(request, response);
         } catch (SocketException ex) {
         	Core.getLogger("MSGraph").error("Exception occurred while processing request "+ex);
-//            new ErrorHandler().processErrorHandler(response, MSGRAPHDIR, SOCKETHTML);
-//            response.sendError("Exception occurred while processing request");
-        	response.setStatus(303, "Location:/");
+            new ErrorHandler().processErrorHandler(response, MSGRAPHDIR, SOCKETHTML);
+            response.sendError("Exception occurred while processing request");
+        	response.setStatus(IMxRuntimeResponse.SEE_OTHER, "Location:/");
         } catch (Exception ex) {
         	Core.getLogger("MSGraph").error("Exception occurred while processing request "+ex);
             new ErrorHandler().processErrorHandler(response, MSGRAPHDIR, ERRORHTML);
